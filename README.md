@@ -10,8 +10,8 @@ Projeto criado com o intuito de praticarmos nossos conhecimentos em Java EE.
 # Funcionalidades
 
 	- Processamento de arquivos de extrato
-	- InclusÃ£o de transaÃ§Ãµes de cartÃ£o de crÃ©dito
-	- InclusÃ£o de transaÃ§Ãµes de conta corrente
-	- InclusÃ£o de categorias de gastos
-	- InclusÃ£o de categorias de receita
-	- RelatÃ³rios
+	- Inclusão de transações de cartão de crédito
+	- Inclusão de transações de conta corrente
+	- Inclusão de categorias de gastos
+	- Inclusão de categorias de receita
+	- Relatórios
