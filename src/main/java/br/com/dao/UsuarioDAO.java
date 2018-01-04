@@ -4,6 +4,7 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -22,13 +23,27 @@ public class UsuarioDAO {
 		TypedQuery<Usuario> query = em.createNamedQuery("findUsuarioByLoginAndPassword", Usuario.class);
 		query.setParameter("login", usuarioDTO.getLogin());
 		query.setParameter("password", usuarioDTO.getSenha());
-		return query.getSingleResult();
+		
+		Usuario usuario;
+		try {
+			usuario = query.getSingleResult();
+		}catch (NoResultException ex){
+			usuario = null;
+		}
+		return usuario;
 	}
 
 	@TransactionAttribute(TransactionAttributeType.MANDATORY)
 	public Usuario findUsuarioById(final UsuarioDTO usuarioDTO) {
 		TypedQuery<Usuario> query = em.createNamedQuery("findUsuarioById", Usuario.class);
 		query.setParameter("id", usuarioDTO.getIdUsuario());
-		return query.getSingleResult();
+		
+		Usuario usuario;
+		try {
+			usuario = query.getSingleResult();
+		}catch (NoResultException ex){
+			usuario = null;
+		}
+		return usuario;
 	}
 }

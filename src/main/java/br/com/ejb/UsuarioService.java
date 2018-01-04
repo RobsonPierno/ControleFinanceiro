@@ -30,13 +30,13 @@ public class UsuarioService {
 	
 	@TransactionAttribute(TransactionAttributeType.MANDATORY)
 	private UsuarioDTO getUsuarioByLoginAndPassword(final UsuarioDTO usuarioDTO) {
-		Usuario usuario = this.usuarioDAO.findUsuarioById(usuarioDTO);
+		Usuario usuario = this.usuarioDAO.findUsuarioByLoginAndPassword(usuarioDTO);
 		return usuarioUtils.convertEntityToDTO(usuario);
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.MANDATORY)
 	private UsuarioDTO getUsuarioById(final UsuarioDTO usuarioDTO) {
-		Usuario usuario = this.usuarioDAO.findUsuarioByLoginAndPassword(usuarioDTO);
+		Usuario usuario = this.usuarioDAO.findUsuarioById(usuarioDTO);
 		return usuarioUtils.convertEntityToDTO(usuario);
 	}
 }

@@ -6,6 +6,10 @@ import br.com.entities.Usuario;
 public class UsuarioUtils {
 
 	public UsuarioDTO convertEntityToDTO(final Usuario entity) {
+		if(entity == null) {
+			return null;
+		}
+		
 		UsuarioDTO dto = new UsuarioDTO();
 		
 		dto.setIdUsuario(entity.getIdUsuario());
@@ -16,6 +20,10 @@ public class UsuarioUtils {
 	}
 	
 	public Usuario convertDTOToEntity(final UsuarioDTO dto) {
+		if(dto == null) {
+			return null;
+		}
+		
 		Usuario entity = new Usuario();
 		
 		entity.setIdUsuario(dto.getIdUsuario());
