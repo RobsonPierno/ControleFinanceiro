@@ -7,12 +7,26 @@
 		xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 	<h:head>
-		<title>Login4</title>
+		<title>Login</title>
 	</h:head>
 	
 	<h:body>
-			<h1>Teste1</h1>
-			<p:outputLabel value="Senha:" />
+		<h:form id="login">
+			<p:fieldset legend="Login">
+				<h:panelGrid columns="3">
+	
+					<p:outputLabel value="Login:" for="loginUsu" />
+					<p:inputText id="loginUsu" value="#{loginBean.usuarioDTO.login}" required="true" requiredMessage="Login obrigatório" />
+					<p:message for="loginUsu" />
+	
+					<p:outputLabel value="Senha:" for="senha" />
+					<p:password id="senha" value="#{loginBean.usuarioDTO.senha}" feedback="false" required="true" />
+					<p:message for="senha" />
+					
+					<p:commandButton value="Efetuar Login" action="#{loginBean.efetuarLogin}" update="@form" process="@form"/>
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
 	</h:body>
 
 </html>
