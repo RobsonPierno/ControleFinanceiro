@@ -1,42 +1,47 @@
 package br.com.beans;
 
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import br.com.entities.Usuario;
+import br.com.dto.UsuarioDTO;
+import br.com.ejb.UsuarioService;
 
 @ManagedBean
 @ViewScoped
 public class LoginBean {
 	
-	private Usuario usuario = new Usuario();
-	
 	private FacesContext facesContext = FacesContext.getCurrentInstance();	
+	
+	private UsuarioDTO usuarioDTO = new UsuarioDTO();
+	
+	@EJB
+	private UsuarioService usuarioService;
 
 	public String efetuarLogin() {
-		System.out.println("Efetuando login " + this.usuario.getLogin());
+		System.out.println("Efetuando login " + this.usuarioDTO.getLogin());
 
-		//buscar usuario pelo email e senha
+		usuarioDTO = this.usuarioService.getUsuario(usuarioDTO);
 		
-		if(usuario != null){
+		if(usuarioDTO != null){
 			
-			facesContext.getExternalContext().getSessionMap().put("usuarioLogado", usuario);
+			facesContext.getExternalContext().getSessionMap().put("usuarioLogado", usuarioDTO);
 					
 			return "tela_inicial?faces-redirect=true";
 		}else{
 			facesContext.addMessage(null,  new FacesMessage("Login ou Senha inválido"));
-            this.usuario = new Usuario();
+            this.usuarioDTO = new UsuarioDTO();
             return "login";
 		}
 	}
 	
-	public Usuario getUsuario() {
-		return usuario;
+	public UsuarioDTO getUsuarioDTO() {
+		return usuarioDTO;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
+		this.usuarioDTO = usuarioDTO;
 	}
 }
