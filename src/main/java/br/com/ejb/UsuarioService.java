@@ -1,5 +1,7 @@
 package br.com.ejb;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -24,7 +26,7 @@ public class UsuarioService {
 			usuarioDTO = this.getUsuarioById(usuarioDTO);
 		}else{
 			usuarioDTO = this.getUsuarioByLoginAndPassword(usuarioDTO);
-		}
+		}		
 		return usuarioDTO;
 	}
 	
@@ -38,5 +40,23 @@ public class UsuarioService {
 	private UsuarioDTO getUsuarioById(final UsuarioDTO usuarioDTO) {
 		Usuario usuario = this.usuarioDAO.findUsuarioById(usuarioDTO);
 		return usuarioUtils.convertEntityToDTO(usuario);
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.MANDATORY)
+	private List<UsuarioDTO> getAllUsuarios() {
+		List<Usuario> usuarios = this.usuarioDAO.findAllUsuarios();
+		return usuarioUtils.convertListEntityToDTO(usuarios);
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.MANDATORY)
+	private void saveUsuario(final UsuarioDTO usuarioDTO) {
+		Usuario usuario = usuarioUtils.convertDTOToEntity(usuarioDTO);
+		this.usuarioDAO.saveUsuario(usuario);
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.MANDATORY)
+	private void deleteUsuario(final UsuarioDTO usuarioDTO) {
+		Usuario usuario = usuarioUtils.convertDTOToEntity(usuarioDTO);
+		this.usuarioDAO.deleteUsuario(usuario);
 	}
 }

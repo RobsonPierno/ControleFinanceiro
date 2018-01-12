@@ -1,5 +1,7 @@
 package br.com.dao;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -17,6 +19,16 @@ public class UsuarioDAO {
 
 	@PersistenceContext
 	private EntityManager em;
+	
+	@TransactionAttribute(TransactionAttributeType.MANDATORY)
+	public void saveUsuario(final Usuario usuario) {
+		em.persist(usuario);
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.MANDATORY)
+	public void deleteUsuario(final Usuario usuario) {
+		em.remove(usuario);
+	}
 	
 	@TransactionAttribute(TransactionAttributeType.MANDATORY)
 	public Usuario findUsuarioByLoginAndPassword(final UsuarioDTO usuarioDTO) {
@@ -45,5 +57,10 @@ public class UsuarioDAO {
 			usuario = null;
 		}
 		return usuario;
+	}
+
+	public List<Usuario> findAllUsuarios() {
+		TypedQuery<Usuario> query = em.createNamedQuery("findAllUsuarios", Usuario.class);
+		return query.getResultList();
 	}
 }

@@ -1,5 +1,8 @@
 package br.com.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.dto.UsuarioDTO;
 import br.com.entities.Usuario;
 
@@ -31,5 +34,13 @@ public class UsuarioUtils {
 		entity.setSenha(dto.getSenha());
 		
 		return entity;
+	}
+
+	public List<UsuarioDTO> convertListEntityToDTO(final List<Usuario> usuarios) {
+		List<UsuarioDTO> listUsuarioDTO = new ArrayList<>();
+		
+		usuarios.forEach(usu->listUsuarioDTO.add(this.convertEntityToDTO(usu)));
+		
+		return listUsuarioDTO;
 	}
 }

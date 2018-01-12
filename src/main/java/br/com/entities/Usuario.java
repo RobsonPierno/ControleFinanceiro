@@ -11,7 +11,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @NamedQueries({	@NamedQuery(name="findUsuarioByLoginAndPassword", query="SELECT u FROM Usuario u WHERE u.login = :login AND u.senha = :password"),
-				@NamedQuery(name="findUsuarioById", query="SELECT u FROM Usuario u WHERE u.idUsuario = :id")})
+				@NamedQuery(name="findUsuarioById", query="SELECT u FROM Usuario u WHERE u.idUsuario = :id"),
+				@NamedQuery(name="findAllUsuarios", query="SELECT u FROM Usuario u")})
 
 @Entity
 @Table(name="usuario")
