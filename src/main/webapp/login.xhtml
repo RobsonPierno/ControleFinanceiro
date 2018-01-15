@@ -11,21 +11,21 @@
 	</h:head>
 	
 	<h:body>
-		<h:form id="login">
-			<p:fieldset legend="Login">
-				<h:panelGrid columns="3">
-	
-					<p:outputLabel value="Login:" for="loginUsu" />
-					<p:inputText id="loginUsu" value="#{loginBean.usuarioDTO.login}" required="true" requiredMessage="Login obrigatório" />
-					<p:message for="loginUsu" />
+		<h:form id="loginForm">
+		    <p:panel id="login" header="LOGIN" style="margin-bottom:20px">
+		        <h:panelGrid columns="3" cellpadding="10">
+		            
+					<p:outputLabel value="Usuário:" for="usuario" />
+					<p:inputText id="usuario" value="#{loginBean.usuarioDTO.login}" required="true" requiredMessage="Usuário obrigatório" />
+					<p:message for="usuario" />
 	
 					<p:outputLabel value="Senha:" for="senha" />
-					<p:password id="senha" value="#{loginBean.usuarioDTO.senha}" feedback="false" required="true" />
+					<p:password id="senha" value="#{loginBean.usuarioDTO.senha}" feedback="false" required="true" requiredMessage="Senha obrigatória" />
 					<p:message for="senha" />
 					
-					<p:commandButton value="Efetuar Login" action="#{loginBean.efetuarLogin}" update="@form" process="@form"/>
-				</h:panelGrid>
-			</p:fieldset>
+					<p:commandButton value="Efetuar Login" id="efetuarLogin" actionListener="#{loginBean.efetuarLogin}" update="@form" process="@form" styleClass="ui-priority-primary" />
+		        </h:panelGrid>
+		    </p:panel>
 		</h:form>
 	</h:body>
 
