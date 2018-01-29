@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.persistence.PersistenceException;
 
 import br.com.dao.UsuarioDAO;
 import br.com.dto.UsuarioDTO;
@@ -30,6 +31,19 @@ public class UsuarioService {
 		return usuarioDTO;
 	}
 	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public Boolean saveUsuario(final UsuarioDTO usuarioDTO) {
+		Boolean retorno = Boolean.TRUE;
+		try {
+			Usuario usuario = usuarioUtils.convertDTOToEntity(usuarioDTO);
+			this.usuarioDAO.saveUsuario(usuario);
+		}catch(PersistenceException ex) {
+			System.out.println("Erro ao persistir usuário " + usuarioDTO.getLogin() + "\n" + ex.getMessage());
+			retorno = Boolean.FALSE;
+		}
+		return retorno;
+	}
+	
 	@TransactionAttribute(TransactionAttributeType.MANDATORY)
 	private UsuarioDTO getUsuarioByLoginAndPassword(final UsuarioDTO usuarioDTO) {
 		Usuario usuario = this.usuarioDAO.findUsuarioByLoginAndPassword(usuarioDTO);
@@ -46,12 +60,6 @@ public class UsuarioService {
 	private List<UsuarioDTO> getAllUsuarios() {
 		List<Usuario> usuarios = this.usuarioDAO.findAllUsuarios();
 		return usuarioUtils.convertListEntityToDTO(usuarios);
-	}
-	
-	@TransactionAttribute(TransactionAttributeType.MANDATORY)
-	private void saveUsuario(final UsuarioDTO usuarioDTO) {
-		Usuario usuario = usuarioUtils.convertDTOToEntity(usuarioDTO);
-		this.usuarioDAO.saveUsuario(usuario);
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.MANDATORY)
