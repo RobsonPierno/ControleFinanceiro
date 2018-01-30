@@ -24,7 +24,7 @@
 					<p:password id="senha" value="#{loginBean.usuarioDTO.senha}" feedback="false" required="true" requiredMessage="Senha obrigatória" />
 					<p:message for="senha" />
 					
-					<p:commandButton value="Efetuar Login" id="efetuarLogin" actionListener="#{loginBean.efetuarLogin}" update="@form" process="@form" styleClass="ui-priority-primary" />
+					<p:commandButton value="Efetuar Login" id="efetuarLogin" action="#{loginBean.efetuarLogin}" update="@form" process="@form" styleClass="ui-priority-primary" />
 					<p:commandButton value="Cadastrar-se" id="cadastro" action="cadastrar_usuario?faces-redirect=true" immediate="true" styleClass="ui-priority-primary" />
 		        </h:panelGrid>
 		    </p:panel>
