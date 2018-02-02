@@ -9,6 +9,7 @@ import javax.faces.context.FacesContext;
 
 import br.com.dto.UsuarioDTO;
 import br.com.ejb.UsuarioService;
+import br.com.utils.PasswordUtils;
 
 @ManagedBean
 @ViewScoped
@@ -17,6 +18,7 @@ public class CadastroUsuarioBean {
 	@ManagedProperty(value = "#{messageBean}")
 	private MessageBean messageBean;
 	
+	private PasswordUtils passwordUtils = new PasswordUtils();
 	private UsuarioDTO usuarioDTO = new UsuarioDTO();
 	
 	@EJB
@@ -25,6 +27,7 @@ public class CadastroUsuarioBean {
 	public String cadastrar() {
 		System.out.println("Cadastro de usuário: Login: " + this.usuarioDTO.getLogin());
 
+		this.usuarioDTO.setSenha(passwordUtils.encrypt(this.usuarioDTO.getSenha()));
 		Boolean isPersistenceSuccess = this.usuarioService.saveUsuario(usuarioDTO);
 		
 		if(isPersistenceSuccess){

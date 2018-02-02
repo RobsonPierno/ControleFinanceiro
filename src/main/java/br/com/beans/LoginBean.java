@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 
 import br.com.dto.UsuarioDTO;
 import br.com.ejb.UsuarioService;
+import br.com.utils.PasswordUtils;
 
 @ManagedBean
 @ViewScoped
@@ -16,6 +17,7 @@ public class LoginBean {
 	@ManagedProperty(value = "#{messageBean}")
 	private MessageBean messageBean;
 	
+	private PasswordUtils passwordUtils = new PasswordUtils();
 	private UsuarioDTO usuarioDTO = new UsuarioDTO();
 	
 	@EJB
@@ -25,6 +27,7 @@ public class LoginBean {
 		System.out.println("Efetuando login " + this.usuarioDTO.getLogin());
 		this.messageBean.setMessage("");
 
+		this.usuarioDTO.setSenha(passwordUtils.encrypt(this.usuarioDTO.getSenha()));
 		usuarioDTO = this.usuarioService.getUsuario(usuarioDTO);
 		
 		if(usuarioDTO != null){

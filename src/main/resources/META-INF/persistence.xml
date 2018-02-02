@@ -4,17 +4,16 @@
         							http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
     			version="2.0">
 
-    <persistence-unit name="FocaNaGrana">
+    <persistence-unit name="TransformationTools">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<jta-data-source>jboss/datasources/focanagrana</jta-data-source>
+		<jta-data-source>jboss/datasources/transformationtools</jta-data-source>
 		
 		<class>br.com.entities.Usuario</class>
-		<class>br.com.entities.Transacao</class>
 		
         <properties>    
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 
-            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true" />
             <property name="hibernate.archive.autodetection" value="class" />
