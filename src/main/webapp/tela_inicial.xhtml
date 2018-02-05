@@ -6,20 +6,11 @@
 		xmlns:p="http://primefaces.org/ui"
 		xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-	<h:head>
-		<title>Transformation Tools</title>
-	</h:head>
+	<ui:composition template="_template.xhtml">
 	
-	<h:body>
-		<h:form>          
-		    <p:growl id="messages" showDetail="true" />
-		 
-		    <p:tieredMenu style="width:200px">
-		        <p:submenu label="Input" icon="ui-icon-gear">
-		            <p:menuitem value="Popular input" actionListener="#{mainMenuBean.save}" update="messages" icon="ui-icon-gear" />
-		        </p:submenu>
-		        <p:separator />
-		    </p:tieredMenu>
-    	</h:form>
-	</h:body>
+		<ui:define name="conteudo">
+			<p:outputLabel value="Escolha uma opção no menu." />
+		</ui:define>
+    	
+	</ui:composition>
 </html>

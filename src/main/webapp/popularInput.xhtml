@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 	xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:h="http://xmlns.jcp.org/jsf/html" 
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<ui:composition template="_template.xhtml">
+	
+		<ui:define name="conteudo">
+			<h:form id="popularInputForm">
+				<h:panelGrid columns="3" cellpadding="10">
+			        <p:inputTextarea rows="20" cols="50" value="#{popularInputBean.input}" id="input" style="width: 100% !important;" autoResize="false" />
+			        <p:commandButton value="Popular" id="popular" actionListener="#{popularInputBean.popular}" update="@form" process="@form" />
+			        <p:inputTextarea rows="20" cols="50" value="#{popularInputBean.output}" id="output" style="width: 100% !important;" autoResize="false" />
+				</h:panelGrid>
+			</h:form>
+		</ui:define>
+    	
+	</ui:composition>
+</html>
