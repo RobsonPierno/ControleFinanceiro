@@ -2,24 +2,32 @@ package br.com.beans;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 @ManagedBean
-@SessionScoped
-public class PopularInputBean {
+@ViewScoped
+public class PopularInputBean extends ValidateSession {
 	
 	private String input;
 	private String output;
 	
 	public void popular() {
+		this.output = new String();
+		AtomicInteger counter = new AtomicInteger(0);
 		List<String> rows = Arrays.asList(this.input.split("\n"));
 		rows.forEach(row -> {
 			int begin = row.indexOf(":")+1;
 			int end = row.indexOf(">");
 			String value = row.substring(begin, end);
-			this.output +=  "\n" + row.replace("?", value);
+			if(row.contains("?")) {
+				counter.addAndGet(1);
+				this.output +=  "\n" + row.replace("?", value + counter);
+			}else {
+				this.output +=  "\n" + row;
+			}
 		});
     }
 	
