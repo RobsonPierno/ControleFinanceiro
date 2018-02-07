@@ -10,7 +10,7 @@ import javax.persistence.PersistenceException;
 
 import br.com.dao.UsuarioDAO;
 import br.com.dto.UsuarioDTO;
-import br.com.entities.Usuario;
+import br.com.entity.Usuario;
 import br.com.utils.UsuarioUtils;
 
 @Stateless

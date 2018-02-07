@@ -1,4 +1,4 @@
-package br.com.beans;
+package br.com.bean;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;

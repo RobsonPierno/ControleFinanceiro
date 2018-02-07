@@ -1,4 +1,4 @@
-package br.com.beans;
+package br.com.bean;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;

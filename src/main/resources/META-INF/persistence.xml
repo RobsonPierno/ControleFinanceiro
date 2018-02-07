@@ -8,7 +8,7 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>jboss/datasources/transformationtools</jta-data-source>
 		
-		<class>br.com.entities.Usuario</class>
+		<class>br.com.entity.Usuario</class>
 		
         <properties>    
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.dto.UsuarioDTO;
-import br.com.entities.Usuario;
+import br.com.entity.Usuario;
 
 public class UsuarioUtils {
 

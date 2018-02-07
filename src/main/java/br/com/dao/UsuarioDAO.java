@@ -11,7 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import br.com.dto.UsuarioDTO;
-import br.com.entities.Usuario;
+import br.com.entity.Usuario;
 
 
 @Stateless

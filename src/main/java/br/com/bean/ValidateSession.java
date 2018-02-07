@@ -1,4 +1,4 @@
-package br.com.beans;
+package br.com.bean;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.NavigationHandler;
