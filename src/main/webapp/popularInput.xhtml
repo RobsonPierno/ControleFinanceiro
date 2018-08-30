@@ -11,9 +11,16 @@
 		<ui:define name="conteudo">
 			<h:form id="popularInputForm">
 				<h:panelGrid columns="3" cellpadding="10">
-			        <p:inputTextarea rows="20" cols="50" value="#{popularInputBean.input}" id="input" style="width: 100% !important;" autoResize="false" />
-			        <p:commandButton value="Popular" id="popular" actionListener="#{popularInputBean.popular}" update="@form" process="@form" />
-			        <p:inputTextarea rows="20" cols="50" value="#{popularInputBean.output}" id="output" style="width: 100% !important;" autoResize="false" />
+				
+			        <p:inputTextarea rows="20" cols="50" value="#{popularInputBean.input}" id="input" 
+			        	style="width: 100% !important;" autoResize="false" />
+			        
+			        <p:commandButton value="Popular" id="popular" actionListener="#{popularInputBean.popular}" 
+			        	update="output" process="@form" />
+			        
+			        <p:inputTextarea rows="20" cols="50" value="#{popularInputBean.output}" id="output" 
+			        	style="width: 100% !important;" autoResize="false" />
+			        	
 				</h:panelGrid>
 			</h:form>
 		</ui:define>

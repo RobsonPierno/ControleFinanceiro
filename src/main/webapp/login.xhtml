@@ -12,6 +12,8 @@
 	
 	<h:body>
 		<h:form id="loginForm">
+			<p:messages id="messages" showDetail="true" closable="true" />
+		
 		    <p:panel id="login" header="LOGIN" style="margin-bottom:20px">
 		    	<p:outputLabel value="#{messageBean.message}" style="color:#008B00;font-weight:bold;background-color:#7FFF00;" />
 		        <h:panelGrid columns="3" cellpadding="10">
@@ -25,7 +27,7 @@
 					<p:message for="senha" />
 					
 					<p:commandButton value="Efetuar Login" id="efetuarLogin" action="#{loginBean.efetuarLogin}" update="@form" process="@form" styleClass="ui-priority-primary" />
-					<p:commandButton value="Cadastrar-se" id="cadastro" action="cadastrar_usuario?faces-redirect=true" immediate="true" styleClass="ui-priority-primary" />
+					<p:commandButton value="Cadastrar-se" id="cadastro" action="cadastrar_usuario" immediate="true" styleClass="ui-priority-primary" />
 		        </h:panelGrid>
 		    </p:panel>
 		</h:form>

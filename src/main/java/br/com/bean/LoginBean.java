@@ -1,23 +1,18 @@
 package br.com.bean;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.dto.UsuarioDTO;
 import br.com.ejb.UsuarioService;
-import br.com.utils.PasswordUtils;
 
 @ManagedBean
 @ViewScoped
 public class LoginBean {
 	
-	@ManagedProperty(value = "#{messageBean}")
-	private MessageBean messageBean;
-	
-	private PasswordUtils passwordUtils = new PasswordUtils();
 	private UsuarioDTO usuarioDTO = new UsuarioDTO();
 	
 	@EJB
@@ -25,30 +20,20 @@ public class LoginBean {
 
 	public String efetuarLogin() {
 		System.out.println("Efetuando login " + this.usuarioDTO.getLogin());
-		this.messageBean.setMessage("");
 
-		this.usuarioDTO.setSenha(passwordUtils.encrypt(this.usuarioDTO.getSenha()));
-		usuarioDTO = this.usuarioService.getUsuario(usuarioDTO);
-		
+		this.setUsuarioDTO(this.usuarioService.getUsuario(usuarioDTO));
 		if(usuarioDTO != null){
-
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogado", usuarioDTO);
-
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogado", this.getUsuarioDTO());
 			return "tela_inicial?faces-redirect=true";
 		}else{
-            this.usuarioDTO = new UsuarioDTO();
+			FacesContext.getCurrentInstance().addMessage(
+					"null", new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Usuário não encontrado ou senha incorreta."));
+			
+            this.setUsuarioDTO(new UsuarioDTO());
             return "login";
 		}
 	}
 	
-	public MessageBean getMessageBean() {
-		return messageBean;
-	}
-
-	public void setMessageBean(MessageBean messageBean) {
-		this.messageBean = messageBean;
-	}
-
 	public UsuarioDTO getUsuarioDTO() {
 		return usuarioDTO;
 	}

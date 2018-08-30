@@ -11,10 +11,10 @@
 	</h:head>
 	
 	<h:body>
-		<p:layout style="min-width:400px;min-height:200px;">
+		<p:layout style="min-width:400px; min-height:200px;">
     		<p:layoutUnit position="west" resizable="false" style="border: 0;">
 		    	<div id="menu">
-					<h:form>          
+					<h:form id="formMenu">          
 					    <p:growl id="messages" showDetail="true" />
 					 
 					    <p:menu>
@@ -30,9 +30,13 @@
     		</p:layoutUnit>
  
     		<p:layoutUnit position="center" style="border: 0;">
-		        <div id="conteudo">
-		            <ui:insert name="conteudo" />
-		        </div>  
+    			<h:form id="formConteudo">
+	    			<p:messages id="messages" showDetail="true" closable="true" />
+	    
+			        <div id="conteudo">
+			            <ui:insert name="conteudo" />
+			        </div>  
+		        </h:form>
     		</p:layoutUnit>
 		</p:layout>
 	</h:body>

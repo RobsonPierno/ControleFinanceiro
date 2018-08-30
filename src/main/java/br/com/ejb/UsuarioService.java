@@ -11,6 +11,7 @@ import javax.persistence.PersistenceException;
 import br.com.dao.UsuarioDAO;
 import br.com.dto.UsuarioDTO;
 import br.com.entity.Usuario;
+import br.com.utils.PasswordUtils;
 import br.com.utils.UsuarioUtils;
 
 @Stateless
@@ -23,6 +24,8 @@ public class UsuarioService {
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public UsuarioDTO getUsuario(UsuarioDTO usuarioDTO) {
+		this.criptografarSenha(usuarioDTO);
+		
 		if(usuarioDTO.getIdUsuario() != null) {
 			usuarioDTO = this.getUsuarioById(usuarioDTO);
 		}else{
@@ -35,6 +38,7 @@ public class UsuarioService {
 	public Boolean saveUsuario(final UsuarioDTO usuarioDTO) {
 		Boolean retorno = Boolean.TRUE;
 		try {
+			this.criptografarSenha(usuarioDTO);
 			Usuario usuario = usuarioUtils.convertDTOToEntity(usuarioDTO);
 			this.usuarioDAO.saveUsuario(usuario);
 		}catch(PersistenceException ex) {
@@ -43,7 +47,7 @@ public class UsuarioService {
 		}
 		return retorno;
 	}
-	
+
 	@TransactionAttribute(TransactionAttributeType.MANDATORY)
 	private UsuarioDTO getUsuarioByLoginAndPassword(final UsuarioDTO usuarioDTO) {
 		Usuario usuario = this.usuarioDAO.findUsuarioByLoginAndPassword(usuarioDTO);
@@ -66,5 +70,11 @@ public class UsuarioService {
 	private void deleteUsuario(final UsuarioDTO usuarioDTO) {
 		Usuario usuario = usuarioUtils.convertDTOToEntity(usuarioDTO);
 		this.usuarioDAO.deleteUsuario(usuario);
+	}
+	
+	private void criptografarSenha(final UsuarioDTO usuarioDTO) {
+		PasswordUtils passwordUtils = new PasswordUtils();
+		String senhaEncriptada = passwordUtils.encrypt(usuarioDTO.getSenha());
+		usuarioDTO.setSenha(senhaEncriptada);
 	}
 }

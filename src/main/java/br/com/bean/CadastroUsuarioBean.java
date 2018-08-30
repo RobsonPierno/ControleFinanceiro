@@ -3,22 +3,16 @@ package br.com.bean;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.dto.UsuarioDTO;
 import br.com.ejb.UsuarioService;
-import br.com.utils.PasswordUtils;
 
 @ManagedBean
 @ViewScoped
 public class CadastroUsuarioBean {
 	
-	@ManagedProperty(value = "#{messageBean}")
-	private MessageBean messageBean;
-	
-	private PasswordUtils passwordUtils = new PasswordUtils();
 	private UsuarioDTO usuarioDTO = new UsuarioDTO();
 	
 	@EJB
@@ -27,24 +21,17 @@ public class CadastroUsuarioBean {
 	public String cadastrar() {
 		System.out.println("Cadastro de usuário: Login: " + this.usuarioDTO.getLogin());
 
-		this.usuarioDTO.setSenha(passwordUtils.encrypt(this.usuarioDTO.getSenha()));
-		Boolean isPersistenceSuccess = this.usuarioService.saveUsuario(usuarioDTO);
+		Boolean isPersistenceSuccess = this.usuarioService.saveUsuario(this.getUsuarioDTO());
 		
 		if(isPersistenceSuccess){
-			this.messageBean.setMessage("Usuário cadastrado com sucesso!");
-			return "login?faces-redirect=true";
+			FacesContext.getCurrentInstance().addMessage(
+					null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Usuário cadastrado com sucesso!"));
+			return "login";
 		}else{
-			FacesContext.getCurrentInstance().addMessage("mensagemCadastroUsuario", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error message", "Erro ao cadastrar usuário"));
+			FacesContext.getCurrentInstance().addMessage(
+					"null", new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Erro ao cadastrar usuário"));
             return "cadastrar_usuario";
 		}
-	}
-	
-	public MessageBean getMessageBean() {
-		return messageBean;
-	}
-
-	public void setMessageBean(MessageBean messageBean) {
-		this.messageBean = messageBean;
 	}
 	
 	public String limpar() {

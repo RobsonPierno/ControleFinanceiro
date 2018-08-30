@@ -1,34 +1,23 @@
 package br.com.bean;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+
+import br.com.ejb.PopularInputService;
 
 @ManagedBean
 @ViewScoped
 public class PopularInputBean extends ValidateSession {
+
+	@EJB
+	private PopularInputService popularInputService;
 	
 	private String input;
 	private String output;
 	
 	public void popular() {
-		this.output = new String();
-		AtomicInteger counter = new AtomicInteger(0);
-		List<String> rows = Arrays.asList(this.input.split("\n"));
-		rows.forEach(row -> {
-			int begin = row.indexOf(":")+1;
-			int end = row.indexOf(">");
-			String value = row.substring(begin, end);
-			if(row.contains("?")) {
-				counter.addAndGet(1);
-				this.output +=  "\n" + row.replace("?", value + counter);
-			}else {
-				this.output +=  "\n" + row;
-			}
-		});
+		this.output = this.popularInputService.gerarOutput(this.getInput());
     }
 	
     public String getInput() {
