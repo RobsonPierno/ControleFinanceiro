@@ -12,6 +12,10 @@ public class MainMenuBean {
     	return "popularInput?faces-redirect=true";
     }
     
+    public String inserirIf() {
+    	return "inserirIf?faces-redirect=true";
+    }
+    
     public String home() {
     	return "tela_inicial?faces-redirect=true";
     }
